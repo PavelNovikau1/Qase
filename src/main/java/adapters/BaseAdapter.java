@@ -3,6 +3,7 @@ package adapters;
 import com.google.gson.Gson;
 import io.restassured.response.Response;
 import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.equalTo;
 
 public class BaseAdapter {
 
@@ -13,16 +14,16 @@ public class BaseAdapter {
     public String get(String url) {
         return
                 given()
-                .header("Token", TOKEN)
-                .header("Content-Type", "application/json")
-                .when()
-                .get(BASE_URL + url)
-                .then()
-                .log().all()
-                .extract().body().asString();
+                        .header("Token", TOKEN)
+                        .header("Content-Type", "application/json")
+                        .when()
+                        .get(BASE_URL + url)
+                        .then()
+                        .log().all()
+                        .extract().body().asString();
     }
 
-    public Response post(String url, String body){
+    public Response post(String url, String body) {
         return
                 given()
                         .header("Token", TOKEN)
@@ -33,5 +34,16 @@ public class BaseAdapter {
                         .then()
                         .log().all()
                         .extract().response();
+    }
+
+    public void delete(String url) {
+        given()
+                .header("Token", TOKEN)
+                .header("Content-Type", "application/json")
+                .when()
+                .delete(BASE_URL + url)
+                .then()
+                .log().all()
+                .assertThat().body("status", equalTo(true));
     }
 }

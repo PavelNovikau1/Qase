@@ -46,5 +46,14 @@ public class QaseTest {
         Assert.assertTrue(status);
     }
 
-
+    @Test
+    public void createAndDeleteJustCreatedSuiteTest() {
+        TestSuite testSuite = TestSuite.builder()
+                .title("Smoke test#100500")
+                .description("This is the smoke test suite")
+                .preconditions("This is preconditions")
+                .build();
+        int id = new SuiteAdapter().create("QA08VC1", testSuite);
+        new SuiteAdapter().delete("QA08VC1", id);
+    }
 }
