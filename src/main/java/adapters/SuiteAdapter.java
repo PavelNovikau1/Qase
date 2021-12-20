@@ -17,7 +17,7 @@ public class SuiteAdapter extends BaseAdapter{
                 .body();
     }
 
-    public void delete(String projectCode, int id) {
-        delete(String.format(SUITE_URI + "/%S", projectCode, id));
+    public  boolean delete(String projectCode, int id) {
+    return delete(String.format(SUITE_URI + "/%S", projectCode, id)).body().path("status");
     }
 }
