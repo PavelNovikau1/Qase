@@ -16,4 +16,8 @@ public class SuiteAdapter extends BaseAdapter{
         return post(String.format(SUITE_URI, projectCode), converter.toJson(testSuite))
                 .body();
     }
+
+    public boolean delete(String projectCode, int id) {
+    return delete(String.format(SUITE_URI + "/%S", projectCode, id)).body().path("status");
+    }
 }

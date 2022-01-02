@@ -1,6 +1,5 @@
 package adapters;
 
-import com.google.gson.annotations.JsonAdapter;
 import objects.Project;
 
 public class ProjectsAdapter extends BaseAdapter {

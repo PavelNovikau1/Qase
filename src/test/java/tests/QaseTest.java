@@ -8,7 +8,7 @@ import objects.TestSuite;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class QaseTest {
+public class QaseTest extends BaseTest{
 
     @Test
     public void getProjectsTest() {
@@ -46,5 +46,15 @@ public class QaseTest {
         Assert.assertTrue(status);
     }
 
-
+    @Test
+    public void createAndDeleteJustCreatedSuiteTest() {
+        TestSuite testSuite = TestSuite.builder()
+                .title("Smoke test#100500")
+                .description("Haste makes waste!")
+                .preconditions("This is preconditions")
+                .build();
+        int id = new SuiteAdapter().create("QA08VC1", testSuite);
+        boolean deleteStatus = new SuiteAdapter().delete("QA08VC1", id);
+        Assert.assertTrue(deleteStatus);
+    }
 }
